@@ -19,18 +19,23 @@ const HomePage = () => {
     dispatch(fetchCountries());
   }, [dispatch]);
 
+  useEffect(() => {    
+    dispatch(loadMore(0));
+  }, [activeTab, dispatch]);
+  
+
   const handleLoadMore = () => {
-    dispatch(loadMore());
+    dispatch(loadMore(visibleCount + 10));
   };
 
-  const canLoadMore = visibleCount < countries.length;
-
-  const visibleCountries = countries.slice(0, visibleCount);
-
+  
   const filteredCountries =
-    activeTab === 'All'
-      ? visibleCountries
-      : visibleCountries.filter((c) => c.region === activeTab);
+  activeTab === 'All'
+  ? countries
+  : countries.filter((c) => c.region === activeTab);  
+  
+  const canLoadMore = visibleCount < filteredCountries.length;
+  const visibleCountries = filteredCountries.slice(0, visibleCount === 0 ? 10 : visibleCount);  
 
   return (
     <>
@@ -65,7 +70,7 @@ const HomePage = () => {
             </div>
           </Col>
         </Row>
-        <CountryList countries={filteredCountries} />
+        <CountryList countries={visibleCountries} />
         {canLoadMore && (
           <Row justify="center" style={{ marginTop: '20px' }}>
             <Col>

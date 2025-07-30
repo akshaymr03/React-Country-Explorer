@@ -14,10 +14,10 @@ const countryReducer = (state = initialState, action) => {
       return { ...state, loading: true, error: null };
     case SET_COUNTRIES:
       return { ...state, countries: action.payload,loading: false, error: null };
-    case LOAD_MORE:
+    case LOAD_MORE:        
       return {
         ...state,
-        visibleCount: Math.min(state.visibleCount + 10, state.countries.length),
+        visibleCount: Math.min(action.payload + 10, state.countries.length),
         loading: false
       };
     case FETCH_ERROR:

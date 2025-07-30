@@ -6,4 +6,4 @@ export const LOAD_MORE = 'LOAD_MORE';
 export const fetchCountries = () => ({ type: FETCH_COUNTRIES });
 export const setCountries = (countries) => ({ type: SET_COUNTRIES, payload: countries });
 export const fetchError = (error) => ({ type: FETCH_ERROR, payload: error });
-export const loadMore = () => ({ type: LOAD_MORE });
+export const loadMore = (count) => ({ type: LOAD_MORE, payload: count });
